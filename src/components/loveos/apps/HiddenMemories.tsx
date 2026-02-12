@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, X, Sparkles } from "lucide-react";
 import { GlassCard } from "@/components/love";
+import { useStorageUrl } from "@/hooks/useStorageUrl";
 
 interface HiddenMemoriesProps {
   customData?: { project: any; analytics: any[]; quiz: any[]; terminal: any[] };
@@ -10,8 +11,8 @@ interface HiddenMemoriesProps {
 const HiddenMemories = ({ customData }: HiddenMemoriesProps) => {
   const [isRevealed, setIsRevealed] = useState(false);
 
-  // If customData, could load collage from storage
-  const collageUrl = customData?.project?.collage_url;
+  // If customData, load collage from storage via the hook
+  const { url: collageUrl } = useStorageUrl(customData?.project?.collage_url);
 
   return (
     <div className="text-center">

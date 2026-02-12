@@ -14,6 +14,7 @@ import { useQuiz, QuizQuestion } from "@/hooks/useQuiz";
 import { useTerminal, TerminalCommand } from "@/hooks/useTerminal";
 import { useShare } from "@/hooks/useShare";
 import { useStorage } from "@/context/StorageContext";
+import { StorageImage } from "@/components/love/StorageImage";
 import {
   Dialog,
   DialogContent,
@@ -285,7 +286,7 @@ const Edit = () => {
                           {/* Image Upload */}
                           <div className="relative aspect-square rounded-xl overflow-hidden bg-accent/20 border-2 border-dashed border-white/10 group-hover:border-primary/20 transition-all">
                             {song.image ? (
-                              <img src={song.image} alt="Song cover" className="w-full h-full object-cover" />
+                              <StorageImage path={song.image} alt="Song cover" className="w-full h-full object-cover" />
                             ) : (
                               <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
                                 <ImageIcon size={24} className="mb-2 opacity-50" />
@@ -310,7 +311,7 @@ const Edit = () => {
                                   const { data } = await uploadFile(file, "images");
                                   if (data) {
                                     const newSongs = [...localProject.songs_meta];
-                                    newSongs[i] = { ...song, image: data.publicUrl };
+                                    newSongs[i] = { ...song, image: data.path };
                                     setLocalProject({ ...localProject, songs_meta: newSongs });
                                     toast({ title: "Cover uploaded! 🎨" });
                                   }
@@ -366,7 +367,7 @@ const Edit = () => {
                                   const { data } = await uploadFile(file, "songs");
                                   if (data) {
                                     const newSongs = [...localProject.songs_meta];
-                                    newSongs[i] = { ...song, audio: data.publicUrl };
+                                    newSongs[i] = { ...song, audio: data.path };
                                     setLocalProject({ ...localProject, songs_meta: newSongs });
                                     toast({ title: "Audio uploaded! 🎵" });
                                   }
@@ -395,7 +396,7 @@ const Edit = () => {
                     <div className="aspect-video rounded-2xl overflow-hidden bg-accent/20 border-2 border-dashed border-white/10 group-hover:border-primary/30 transition-all flex items-center justify-center relative">
                       {localProject.collage_url ? (
                         <>
-                          <img src={localProject.collage_url} alt="Collage preview" className="w-full h-full object-cover" />
+                          <StorageImage path={localProject.collage_url} alt="Collage preview" className="w-full h-full object-cover" />
                           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <RomanticButton variant="secondary" className="scale-90">Change Image</RomanticButton>
                           </div>
@@ -425,7 +426,7 @@ const Edit = () => {
                             }
                             const { data } = await uploadFile(file, "images");
                             if (data) {
-                              setLocalProject({ ...localProject, collage_url: data.publicUrl });
+                              setLocalProject({ ...localProject, collage_url: data.path });
                               toast({ title: "Collage uploaded! ✨" });
                             }
                           }

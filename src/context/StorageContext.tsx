@@ -62,11 +62,7 @@ export const StorageProvider = ({ children }: { children: ReactNode }) => {
                 setState(s => ({ ...s, isUploading: false }));
             }, 2000);
 
-            const { data: { publicUrl } } = supabase.storage
-                .from("loveos-uploads")
-                .getPublicUrl(fullPath);
-
-            return { data: { ...data, publicUrl }, error: null };
+            return { data: { path: fullPath }, error: null };
         } catch (err: any) {
             setState(s => ({ ...s, isUploading: false, error: err.message }));
             return { data: null, error: err };
