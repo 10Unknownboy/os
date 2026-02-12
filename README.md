@@ -1,73 +1,194 @@
-# Welcome to your Lovable project
+# 💖 Love OS  
+### Because texting "I miss you" is too basic.
 
-## Project info
+Welcome to **Love OS** — the only place where your love, delusion, and commitment issues get their own operating system.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Why just say *"I love you"* on WhatsApp…  
+when you can deploy a full romantic desktop ecosystem with floating hearts, secret unlock codes, analytics dashboards, and a terminal that hacks feelings?
 
-## How can I edit this code?
+Yes.  
+We built infrastructure for emotions.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+# 🌸 What Is Love OS?
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Love OS is a romantic web-based desktop experience where you:
 
-Changes made via Lovable will be committed automatically to this repo.
+💌 Create a personalized digital OS for your partner  
+🔐 Protect it with secret codes + voice unlock  
+🖼️ Upload memories as aesthetic polaroids  
+📊 Show a "Love Wrapped" report (because stats matter)  
+🧠 Add a quiz to test loyalty  
+💻 Open a terminal to unlock hidden messages  
 
-**Use your preferred IDE**
+It's a love letter.  
+It's a portfolio piece.  
+It's a controlled emotional attack.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# 💌 Main Features
 
-Follow these steps:
+## 🖥️ Personalized Desktop
+A full OS-style interface with draggable windows, icons, and glassmorphism vibes.
+
+Because romance should feel premium.
+
+---
+
+## 🖼️ Memories App
+Upload nostalgic photos that appear as cute polaroids.
+
+Warning: may cause unexpected "aww" reactions.
+
+---
+
+## 📊 Love Wrapped
+Spotify Wrapped, but for your relationship.
+
+Top moments.  
+Milestones.  
+Proof you're the MVP.
+
+---
+
+## 🧠 Quiz App
+Test their memory.
+
+Forgot your anniversary?  
+Now it's documented.
+
+---
+
+## 💻 Love Terminal
+Type cute commands.  
+Unlock hidden secrets.  
+Pretend your relationship runs on Linux.
+
+---
+
+## 🔐 Secret Code + Voice Unlock
+Share a protected link.  
+They enter the secret code.  
+Then speak the unlock word.
+
+If they say it right?  
+The whole Love OS opens.
+
+If not?  
+Skill issue.
+
+---
+
+# 🛡️ Privacy & Security  
+### Yes, your simping is protected.
+
+We take emotional security seriously.
+
+🔐 **Supabase Auth** – No plaintext passwords  
+🛡️ **Row Level Security (RLS)** – You access only your data  
+📂 **Per-user storage folders** – No cross-user drama  
+🔑 **Hashed share codes (SHA-256)** – Even romance is encrypted  
+🚫 No creepy trackers  
+🚫 No public exposure  
+
+Your memories stay yours.  
+Your delusion stays private.
+
+---
+
+# 🧠 Tech Stack (For the Nerds Who Read READMEs)
+
+Built with:
+
+⚡ Vite – lightning-fast builds  
+⚛️ React – component magic  
+🧠 TypeScript – JavaScript with discipline  
+🎨 Tailwind CSS – utility-first styling  
+🧹 shadcn/ui – clean UI components  
+☁️ Supabase – Auth + Database + Storage  
+
+No localStorage hacks.  
+No fake JSON pretending to be serious.  
+This is production-ready romance.
+
+---
+
+# 🚀 Getting Started (Dev Mode Activated)
+
+## 🧙‍♂️ Wizard Mode (Local Development)
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the project
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Enter the project
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Run dev server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Make sure you have Node.js installed.  
+Because love may be optional. Node isn't.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## ✏️ Edit Directly on GitHub
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+* Open a file
+* Click the ✏️ icon
+* Type
+* Commit
+* Feel powerful
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🧑‍🚀 GitHub Codespaces
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+* Click the green **Code** button
+* Open Codespaces
+* Launch
+* Code in the cloud like a romantic hacker
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+# 🤝 Why This Exists
 
-## Can I connect a custom domain to my Lovable project?
+Because real ones build cool things for people they care about.
 
-Yes, you can!
+Sometimes the best way to say "I love you"  
+is with clean architecture and protected routes.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# 🧑‍💻 Developer Zone
+
+Built with caffeine, curiosity, and questionable sleep cycles by:
+
+📸 Instagram: [@manglesh.__.ks](https://www.instagram.com/manglesh.__.ks/)
+
+Follow if:
+
+* This made you smile
+* You need a custom Love OS
+* Or you're just stalking respectfully
+
+---
+
+# ⚠️ Disclaimer
+
+This app does **not**:
+
+❌ Fix relationships  
+❌ Make them text you back  
+❌ Guarantee emotional stability  
+
+It just makes your obsession look insanely aesthetic.
+
+The rest?  
+That's on you. 💘

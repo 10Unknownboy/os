@@ -7,18 +7,72 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-# Editor directories and files
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript v1 declaration files
+typings/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+.env.*
+
+# Build output
+dist/
+dist-ssr/
+build/
+
+# IDE files
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# OS produced files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+
+# Vite
+*.timestamp-*
+
+# Playwright/Cypress
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Vercel
+.vercel
+
+# Bun
+.bun
