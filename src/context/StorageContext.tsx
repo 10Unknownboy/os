@@ -10,7 +10,7 @@ interface UploadState {
 }
 
 interface StorageContextType extends UploadState {
-    uploadFile: (file: File, pathPrefix: "images" | "songs" | "auth") => Promise<{ data: any; error: any }>;
+    uploadFile: (file: File, pathPrefix: "images" | "songs" | "auth" | "voice") => Promise<{ data: any; error: any }>;
 }
 
 const StorageContext = createContext<StorageContextType | undefined>(undefined);
@@ -24,7 +24,7 @@ export const StorageProvider = ({ children }: { children: ReactNode }) => {
         error: null,
     });
 
-    const uploadFile = useCallback(async (file: File, pathPrefix: "images" | "songs" | "auth") => {
+    const uploadFile = useCallback(async (file: File, pathPrefix: "images" | "songs" | "auth" | "voice") => {
         if (!user) {
             const err = new Error("Not authenticated");
             setState(s => ({ ...s, error: err.message }));

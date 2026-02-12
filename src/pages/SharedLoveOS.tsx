@@ -8,6 +8,7 @@ import { useAnalytics } from "@/hooks/useAnalytics";
 import { useQuiz } from "@/hooks/useQuiz";
 import { useTerminal } from "@/hooks/useTerminal";
 import { GlassCard, RomanticButton, FloatingHearts } from "@/components/love";
+import { VoiceUnlockScreen } from "@/components/loveos/VoiceUnlockScreen";
 import Desktop from "@/components/loveos/Desktop";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -81,7 +82,20 @@ const SharedLoveOS = () => {
     if (urlCode) setCode(urlCode);
   }, [searchParams]);
 
+  const [voiceUnlocked, setVoiceUnlocked] = useState(false);
+
+  const needsVoiceUnlock = projectData?.project?.voice_word && projectData?.project?.voice_file_path;
+
   if (isUnlocked && projectData) {
+    if (needsVoiceUnlock && !voiceUnlocked) {
+      return (
+        <VoiceUnlockScreen
+          targetWord={projectData.project.voice_word}
+          onUnlocked={() => setVoiceUnlocked(true)}
+        />
+      );
+    }
+
     return (
       <Desktop
         customData={{

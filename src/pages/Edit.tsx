@@ -14,7 +14,9 @@ import { useQuiz, QuizQuestion } from "@/hooks/useQuiz";
 import { useTerminal, TerminalCommand } from "@/hooks/useTerminal";
 import { useShare } from "@/hooks/useShare";
 import { useStorage } from "@/context/StorageContext";
+import { useVoiceRecorder } from "@/hooks/useVoiceRecorder";
 import { StorageImage } from "@/components/love/StorageImage";
+import { Trash2, Mic } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -38,6 +40,7 @@ const Edit = () => {
   const [shareCode, setShareCode] = useState("");
   const [copied, setCopied] = useState(false);
   const [saving, setSaving] = useState(false);
+  const { isRecording: isVoiceRecording, audioUrl: recordedVoiceUrl, startRecording: startVoiceRecording, stopRecording: stopVoiceRecording, uploadVoice, resetRecording: resetVoiceRecording } = useVoiceRecorder();
 
   // Local state for edits
   const [localProject, setLocalProject] = useState<any>(null);
@@ -73,8 +76,10 @@ const Edit = () => {
         initial_1: localProject.initial_1,
         initial_2: localProject.initial_2,
         voice_word: localProject.voice_word,
+        voice_file_path: localProject.voice_file_path,
         partner_name: localProject.partner_name,
         songs_meta: localProject.songs_meta,
+        collage_url: localProject.collage_url,
       });
 
       if (projectError) throw projectError;
@@ -228,6 +233,71 @@ const Edit = () => {
                       className="bg-background/50 h-12 text-lg font-mono focus:ring-primary/20 uppercase"
                     />
                     <p className="text-sm text-muted-foreground italic">The secret password they'll speak to enter.</p>
+                  </div>
+                </div>
+
+                {/* Voice Recording Section */}
+                <div className="pt-6 space-y-4">
+                  <Label className="text-lg font-semibold">Secret Voice Sample</Label>
+                  <div className="p-6 rounded-2xl bg-primary/5 border border-primary/10 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium">Record yourself saying: <span className="text-primary font-bold">"{localProject.voice_word || 'Unlock'}"</span></p>
+                        <p className="text-xs text-muted-foreground">This helps verify the unlock mechanism works.</p>
+                      </div>
+
+                      <div className="flex gap-2">
+                        {isVoiceRecording ? (
+                          <RomanticButton
+                            variant="secondary"
+                            onClick={stopVoiceRecording}
+                            className="bg-destructive hover:bg-destructive/90 text-destructive-foreground animate-pulse border-none"
+                          >
+                            <Mic size={18} className="mr-2" /> Stop Recording
+                          </RomanticButton>
+                        ) : (
+                          <RomanticButton
+                            variant="secondary"
+                            onClick={startVoiceRecording}
+                          >
+                            <Mic size={18} className="mr-2" /> {recordedVoiceUrl ? "Record Again" : "Start Recording"}
+                          </RomanticButton>
+                        )}
+                      </div>
+                    </div>
+
+                    {recordedVoiceUrl && (
+                      <div className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-xl bg-background/50 border border-white/10">
+                        <audio src={recordedVoiceUrl} controls className="h-8 max-w-full" />
+                        <div className="flex gap-2 w-full sm:w-auto">
+                          <RomanticButton
+                            variant="secondary"
+                            className="flex-1 sm:flex-none h-8 text-xs"
+                            onClick={async () => {
+                              const path = await uploadVoice();
+                              if (path) {
+                                setLocalProject({ ...localProject, voice_file_path: path });
+                                toast({ title: "Voice sample saved! 🎙️" });
+                              }
+                            }}
+                          >
+                            <Save size={14} className="mr-2" /> Use This Recording
+                          </RomanticButton>
+                          <button
+                            onClick={resetVoiceRecording}
+                            className="p-2 text-muted-foreground hover:text-destructive transition-colors"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {localProject.voice_file_path && !recordedVoiceUrl && (
+                      <div className="flex items-center gap-2 text-xs text-primary font-medium">
+                        <Check size={14} /> Voice sample already saved.
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -503,69 +573,85 @@ const Edit = () => {
                       </div>
 
                       <div className="space-y-3">
-                        <div className="space-y-1">
-                          <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Current Value</Label>
-                          <Input
-                            value={item.value}
-                            onChange={(e) => {
-                              const newAnalytics = [...localAnalytics];
-                              newAnalytics[i] = { ...item, value: e.target.value };
-                              setLocalAnalytics(newAnalytics);
-                            }}
-                            className="bg-background/40 h-10 border-white/10"
-                            placeholder="e.g. 730"
-                          />
-                        </div>
-
-                        <div className="space-y-1">
-                          <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Subtitle</Label>
-                          <Input
-                            value={item.subtitle}
-                            onChange={(e) => {
-                              const newAnalytics = [...localAnalytics];
-                              newAnalytics[i] = { ...item, subtitle: e.target.value };
-                              setLocalAnalytics(newAnalytics);
-                            }}
-                            className="bg-background/40 h-10 border-white/10"
-                            placeholder="e.g. Days Together"
-                          />
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-2">
+                        {item.type === "date" ? (
                           <div className="space-y-1">
-                            <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Type</Label>
-                            <select
-                              value={item.type}
+                            <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Select Date</Label>
+                            <Input
+                              type="date"
+                              value={item.value || ""}
                               onChange={(e) => {
                                 const newAnalytics = [...localAnalytics];
-                                newAnalytics[i] = { ...item, type: e.target.value };
+                                newAnalytics[i] = { ...item, value: e.target.value };
                                 setLocalAnalytics(newAnalytics);
                               }}
-                              className="w-full h-10 rounded-md bg-background/40 border border-white/10 text-sm px-3 focus:outline-none focus:ring-1 focus:ring-primary/20"
-                            >
-                              <option value="counter">Counter</option>
-                              <option value="text">Text</option>
-                              <option value="date">Date</option>
-                              <option value="progress">Progress</option>
-                            </select>
+                              className="bg-background/40 h-10 border-white/10"
+                            />
                           </div>
-                          {item.type === "progress" && (
-                            <div className="space-y-1">
-                              <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Max</Label>
-                              <Input
-                                type="number"
-                                value={item.max_value || ""}
-                                onChange={(e) => {
-                                  const newAnalytics = [...localAnalytics];
-                                  newAnalytics[i] = { ...item, max_value: parseInt(e.target.value) || null };
-                                  setLocalAnalytics(newAnalytics);
-                                }}
-                                className="bg-background/40 h-10 border-white/10"
-                                placeholder="100"
-                              />
-                            </div>
-                          )}
+                        ) : (
+                          <div className="space-y-1">
+                            <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Current Value</Label>
+                            <Input
+                              value={item.value}
+                              onChange={(e) => {
+                                const newAnalytics = [...localAnalytics];
+                                newAnalytics[i] = { ...item, value: e.target.value };
+                                setLocalAnalytics(newAnalytics);
+                              }}
+                              className="bg-background/40 h-10 border-white/10"
+                              placeholder="e.g. 730"
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="space-y-1">
+                        <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Subtitle</Label>
+                        <Input
+                          value={item.subtitle}
+                          onChange={(e) => {
+                            const newAnalytics = [...localAnalytics];
+                            newAnalytics[i] = { ...item, subtitle: e.target.value };
+                            setLocalAnalytics(newAnalytics);
+                          }}
+                          className="bg-background/40 h-10 border-white/10"
+                          placeholder="e.g. Days Together"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="space-y-1">
+                          <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Type</Label>
+                          <select
+                            value={item.type}
+                            onChange={(e) => {
+                              const newAnalytics = [...localAnalytics];
+                              newAnalytics[i] = { ...item, type: e.target.value };
+                              setLocalAnalytics(newAnalytics);
+                            }}
+                            className="w-full h-10 rounded-md bg-background/40 border border-white/10 text-sm px-3 focus:outline-none focus:ring-1 focus:ring-primary/20"
+                          >
+                            <option value="counter">Counter</option>
+                            <option value="text">Text</option>
+                            <option value="date">Date</option>
+                            <option value="progress">Progress</option>
+                          </select>
                         </div>
+                        {item.type === "progress" && (
+                          <div className="space-y-1">
+                            <Label className="text-[10px] uppercase text-muted-foreground font-bold tracking-wider">Max</Label>
+                            <Input
+                              type="number"
+                              value={item.max_value || ""}
+                              onChange={(e) => {
+                                const newAnalytics = [...localAnalytics];
+                                newAnalytics[i] = { ...item, max_value: parseInt(e.target.value) || null };
+                                setLocalAnalytics(newAnalytics);
+                              }}
+                              className="bg-background/40 h-10 border-white/10"
+                              placeholder="100"
+                            />
+                          </div>
+                        )}
                       </div>
                     </GlassCard>
                   ))}
@@ -735,10 +821,10 @@ const Edit = () => {
             </div>
           </Tabs>
         </GlassCard>
-      </motion.div>
+      </motion.div >
 
       {/* Share Dialog */}
-      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+      < Dialog open={showShareDialog} onOpenChange={setShowShareDialog} >
         <DialogContent className="glass-card border-border/50 sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-gradient text-2xl flex items-center gap-2">
@@ -772,8 +858,8 @@ const Edit = () => {
             </div>
           </div>
         </DialogContent>
-      </Dialog>
-    </div>
+      </Dialog >
+    </div >
   );
 };
 

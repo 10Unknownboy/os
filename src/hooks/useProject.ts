@@ -8,6 +8,8 @@ export interface Project {
   initial_1: string;
   initial_2: string;
   voice_word: string;
+  voice_file_path?: string | null;
+  collage_url?: string | null;
   partner_name: string;
   songs_meta: any[];
 }
