@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Love OS - Romantic Glassmorphism Design System */
+
+@layer base {
+  :root {
+    /* Core romantic palette */
+    --background: 340 30% 97%;
+    --foreground: 340 30% 10%;
+
+    --card: 340 40% 98%;
+    --card-foreground: 340 30% 10%;
+
+    --popover: 340 40% 98%;
+    --popover-foreground: 340 30% 10%;
+
+    --primary: 340 82% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 340 30% 92%;
+    --secondary-foreground: 340 30% 20%;
+
+    --muted: 340 20% 94%;
+    --muted-foreground: 340 15% 45%;
+
+    --accent: 340 60% 88%;
+    --accent-foreground: 340 40% 25%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 340 30% 88%;
+    --input: 340 30% 88%;
+    --ring: 340 82% 65%;
+
+    --radius: 1rem;
+
+    /* Love OS Custom Colors */
+    --love-pink: 340 82% 65%;
+    --love-rose: 350 65% 50%;
+    --love-coral: 15 80% 65%;
+    --love-lavender: 270 60% 75%;
+    --love-blush: 340 50% 92%;
+    --love-deep: 340 80% 35%;
+    
+    /* Glassmorphism */
+    --glass-bg: 340 40% 98% / 0.7;
+    --glass-border: 340 40% 90% / 0.5;
+    --glass-shadow: 340 50% 50% / 0.1;
+    
+    /* Gradients */
+    --gradient-romantic: linear-gradient(135deg, hsl(340 82% 65%), hsl(350 65% 50%));
+    --gradient-blush: linear-gradient(135deg, hsl(340 50% 92%), hsl(340 40% 98%));
+    --gradient-sunset: linear-gradient(135deg, hsl(340 82% 65%), hsl(15 80% 65%));
+
+    --sidebar-background: 340 30% 97%;
+    --sidebar-foreground: 340 30% 20%;
+    --sidebar-primary: 340 82% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 340 60% 88%;
+    --sidebar-accent-foreground: 340 40% 25%;
+    --sidebar-border: 340 30% 88%;
+    --sidebar-ring: 340 82% 65%;
+  }
+
+  .dark {
+    --background: 340 30% 8%;
+    --foreground: 340 20% 95%;
+
+    --card: 340 30% 12%;
+    --card-foreground: 340 20% 95%;
+
+    --popover: 340 30% 12%;
+    --popover-foreground: 340 20% 95%;
+
+    --primary: 340 82% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 340 30% 18%;
+    --secondary-foreground: 340 20% 90%;
+
+    --muted: 340 25% 20%;
+    --muted-foreground: 340 15% 60%;
+
+    --accent: 340 40% 25%;
+    --accent-foreground: 340 20% 90%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 340 30% 20%;
+    --input: 340 30% 20%;
+    --ring: 340 82% 65%;
+
+    /* Dark mode glass */
+    --glass-bg: 340 30% 12% / 0.8;
+    --glass-border: 340 30% 25% / 0.5;
+    --glass-shadow: 0 0% 0% / 0.3;
+
+    --sidebar-background: 340 30% 10%;
+    --sidebar-foreground: 340 20% 90%;
+    --sidebar-primary: 340 82% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 340 40% 25%;
+    --sidebar-accent-foreground: 340 20% 90%;
+    --sidebar-border: 340 30% 20%;
+    --sidebar-ring: 340 82% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply rounded-2xl border;
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: hsl(var(--glass-border));
+    box-shadow: 
+      0 8px 32px hsl(var(--glass-shadow)),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1);
+  }
+
+  .glass-card-strong {
+    @apply glass-card;
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+  }
+
+  /* Romantic Button */
+  .btn-romantic {
+    @apply px-6 py-3 rounded-xl font-semibold text-primary-foreground transition-all duration-300;
+    background: var(--gradient-romantic);
+    box-shadow: 0 4px 15px hsl(var(--love-pink) / 0.4);
+  }
+
+  .btn-romantic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px hsl(var(--love-pink) / 0.5);
+  }
+
+  .btn-romantic:active {
+    transform: translateY(0);
+  }
+
+  /* Heart pulse animation */
+  .heart-pulse {
+    animation: heartPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes heartPulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Sparkle effect */
+  .sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  /* Spin slow for heart icon */
+  .spin-slow {
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    background: var(--gradient-romantic);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effect */
+  .glow-pink {
+    box-shadow: 0 0 20px hsl(var(--love-pink) / 0.5),
+                0 0 40px hsl(var(--love-pink) / 0.3),
+                0 0 60px hsl(var(--love-pink) / 0.1);
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Custom scrollbar for romantic theme */
+  .scrollbar-romantic {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--love-pink)) transparent;
+  }
+
+  .scrollbar-romantic::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-romantic::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-romantic::-webkit-scrollbar-thumb {
+    background: hsl(var(--love-pink));
+    border-radius: 3px;
+  }
+}

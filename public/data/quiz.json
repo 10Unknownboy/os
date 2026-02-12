@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "Where did we have our first date?",
+      "options": ["Coffee shop downtown", "The park by the lake", "That cozy Italian restaurant", "The movie theater"],
+      "correct": 2
+    },
+    {
+      "id": 2,
+      "question": "What was the first movie we watched together?",
+      "options": ["The Notebook", "La La Land", "Titanic", "A romantic comedy"],
+      "correct": 1
+    },
+    {
+      "id": 3,
+      "question": "What's my favorite thing about you?",
+      "options": ["Your smile", "Your laugh", "Your kindness", "Everything!"],
+      "correct": 3
+    },
+    {
+      "id": 4,
+      "question": "What song makes me think of you?",
+      "options": ["Perfect by Ed Sheeran", "All of Me by John Legend", "Can't Help Falling in Love", "Our special song"],
+      "correct": 0
+    },
+    {
+      "id": 5,
+      "question": "What's our favorite way to spend a lazy Sunday?",
+      "options": ["Netflix and cuddles", "Brunch adventures", "Long walks together", "Sleeping in late"],
+      "correct": 0
+    },
+    {
+      "id": 6,
+      "question": "What did I say when I first saw you?",
+      "options": ["Wow", "Hello there", "Something dorky", "I was speechless"],
+      "correct": 3
+    },
+    {
+      "id": 7,
+      "question": "What's the best trip we've taken together?",
+      "options": ["Beach vacation", "Mountain getaway", "City exploration", "Every trip with you"],
+      "correct": 3
+    },
+    {
+      "id": 8,
+      "question": "What do I love most about our relationship?",
+      "options": ["The adventures", "The deep conversations", "The little moments", "Being your person"],
+      "correct": 2
+    },
+    {
+      "id": 9,
+      "question": "What's my nickname for you?",
+      "options": ["Honey", "Baby", "Love", "Something unique to us"],
+      "correct": 3
+    },
+    {
+      "id": 10,
+      "question": "How many 'I love you's do we say per day?",
+      "options": ["5-10", "10-20", "20-50", "Countless"],
+      "correct": 3
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "commands": {
+    "help": "💕 Available commands:\n• pickup - Get a romantic pickup line\n• kiss - Send a virtual kiss\n• hug - Get a warm virtual hug\n• compliment - Receive a sweet compliment\n• poem - Read a love poem\n• quote - Famous love quote\n• song - Get a song recommendation\n• fortune - Love fortune telling\n• stats - Our relationship stats\n• mood - Current love mood\n• weather - Love weather forecast\n• heart - ASCII heart art\n• clear - Clear terminal",
+    "pickup": [
+      "Are you a magician? Because whenever I look at you, everyone else disappears. ✨",
+      "Do you have a map? I just got lost in your eyes. 🗺️💕",
+      "Is your name Google? Because you have everything I've been searching for. 🔍",
+      "If beauty were time, you'd be an eternity. ⏰💖",
+      "Are you a camera? Because every time I look at you, I smile. 📸😊"
+    ],
+    "kiss": "💋 *sending virtual kisses* 💋\n\nMwah! Mwah! Mwah!\n\nNo matter the distance, my love reaches you! 💕",
+    "hug": "🤗 *wrapping you in the warmest virtual hug*\n\n╔══════════════════╗\n║   ♡ HUG TIME ♡   ║\n║   (っ´▽`)っ       ║\n║                  ║\n║  Feel the love!  ║\n╚══════════════════╝\n\nHold on tight! 💕",
+    "compliment": [
+      "You light up every room you walk into. ✨",
+      "Your smile could cure any bad day. 😊",
+      "You're the most beautiful person, inside and out. 💖",
+      "Being with you is my favorite adventure. 🌟",
+      "You make ordinary moments feel magical. ✨"
+    ],
+    "poem": "🌹 A Love Poem for You 🌹\n\nIn the garden of my heart,\nYou bloom like the rarest flower.\nEvery moment we're apart,\nI count each passing hour.\n\nYour love is my sunshine bright,\nMy stars, my moon above.\nYou are my day, you are my night,\nYou are my endless love. 💕",
+    "quote": [
+      "\"I love you not because of who you are, but because of who I am when I am with you.\" - Roy Croft 💕",
+      "\"In all the world, there is no heart for me like yours.\" - Maya Angelou 💖",
+      "\"You are my today and all of my tomorrows.\" - Leo Christopher ✨",
+      "\"I have found the one whom my soul loves.\" - Song of Solomon 🌹",
+      "\"Whatever our souls are made of, yours and mine are the same.\" - Emily Brontë 💕"
+    ],
+    "song": "🎵 Song Recommendation 🎵\n\n♫ \"Perfect\" by Ed Sheeran ♫\n\n\"I found a love, for me...\nDarling, just dive right in and follow my lead...\"\n\nThis song always reminds me of us! 💕",
+    "fortune": "🔮 Love Fortune 🔮\n\n*gazing into the crystal ball*\n\nI see... endless happiness!\nYour love story is written in the stars.\n\n⭐ Lucky love number: 143 (I Love You)\n💕 Love forecast: Sunny with 100% chance of cuddles\n🌹 Special message: Every day with you is Valentine's Day\n\nThe universe smiles upon your love! ✨",
+    "stats": "📊 Our Love Stats 📊\n\n💕 Days Together: ∞ (and counting!)\n💬 Messages Shared: 500,000+\n☎️ Hours on Calls: Too many to count\n😂 Laughs Shared: Infinite\n🤗 Hugs Given: Never enough\n💋 Kisses: Countless\n❤️ Love Level: MAXIMUM\n\nStatus: Hopelessly in love! 💕",
+    "mood": "💕 Current Love Mood 💕\n\n[████████████████████] 100%\n\nMood: Absolutely Smitten! 😍\n\nSide effects may include:\n• Constant smiling\n• Heart fluttering\n• Daydreaming about you\n• Feeling incredibly lucky\n\nDiagnosis: Deeply, madly in love! 💖",
+    "weather": "🌈 Love Weather Forecast 🌈\n\n╔═══════════════════════╗\n║ TODAY'S LOVE WEATHER  ║\n╠═══════════════════════╣\n║ ☀️ Sunny with Love    ║\n║ 💕 100% Romantic      ║\n║ 🌡️ Warm & Fuzzy       ║\n║ 💋 Kiss Probability:  ║\n║    VERY HIGH!         ║\n╚═══════════════════════╝\n\nPerfect weather for love! 💕",
+    "heart": "\n    💕💕💕   💕💕💕\n  💕     💕💕     💕\n 💕       💕       💕\n 💕                 💕\n  💕   I LOVE YOU  💕\n   💕             💕\n     💕         💕\n       💕     💕\n         💕 💕\n           💕\n\n       Forever & Always 💕"
+  }
+}
