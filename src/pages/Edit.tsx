@@ -14,9 +14,8 @@ import { useQuiz, QuizQuestion } from "@/hooks/useQuiz";
 import { useTerminal, TerminalCommand } from "@/hooks/useTerminal";
 import { useShare } from "@/hooks/useShare";
 import { useStorage } from "@/context/StorageContext";
-import { useVoiceRecorder } from "@/hooks/useVoiceRecorder";
 import { StorageImage } from "@/components/love/StorageImage";
-import { Trash2, Mic } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -40,7 +39,6 @@ const Edit = () => {
   const [shareCode, setShareCode] = useState("");
   const [copied, setCopied] = useState(false);
   const [saving, setSaving] = useState(false);
-  const { isRecording: isVoiceRecording, audioUrl: recordedVoiceUrl, startRecording: startVoiceRecording, stopRecording: stopVoiceRecording, uploadVoice, resetRecording: resetVoiceRecording } = useVoiceRecorder();
 
   // Local state for edits
   const [localProject, setLocalProject] = useState<any>(null);
@@ -75,8 +73,6 @@ const Edit = () => {
       const { error: projectError } = await updateProject({
         initial_1: localProject.initial_1,
         initial_2: localProject.initial_2,
-        voice_word: localProject.voice_word,
-        voice_file_path: localProject.voice_file_path,
         partner_name: localProject.partner_name,
         songs_meta: localProject.songs_meta,
         collage_url: localProject.collage_url,
@@ -221,83 +217,6 @@ const Edit = () => {
                       className="bg-background/50 h-12 text-lg focus:ring-primary/20"
                     />
                     <p className="text-sm text-muted-foreground italic">How should I address your special person?</p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <Label htmlFor="voiceWord" className="text-lg font-semibold">Voice Unlock Word</Label>
-                    <Input
-                      id="voiceWord"
-                      placeholder="The magic word"
-                      value={localProject.voice_word}
-                      onChange={(e) => setLocalProject({ ...localProject, voice_word: e.target.value })}
-                      className="bg-background/50 h-12 text-lg font-mono focus:ring-primary/20 uppercase"
-                    />
-                    <p className="text-sm text-muted-foreground italic">The secret password they'll speak to enter.</p>
-                  </div>
-                </div>
-
-                {/* Voice Recording Section */}
-                <div className="pt-6 space-y-4">
-                  <Label className="text-lg font-semibold">Secret Voice Sample</Label>
-                  <div className="p-6 rounded-2xl bg-primary/5 border border-primary/10 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-1">
-                        <p className="text-sm font-medium">Record yourself saying: <span className="text-primary font-bold">"{localProject.voice_word || 'Unlock'}"</span></p>
-                        <p className="text-xs text-muted-foreground">This helps verify the unlock mechanism works.</p>
-                      </div>
-
-                      <div className="flex gap-2">
-                        {isVoiceRecording ? (
-                          <RomanticButton
-                            variant="secondary"
-                            onClick={stopVoiceRecording}
-                            className="bg-destructive hover:bg-destructive/90 text-destructive-foreground animate-pulse border-none"
-                          >
-                            <Mic size={18} className="mr-2" /> Stop Recording
-                          </RomanticButton>
-                        ) : (
-                          <RomanticButton
-                            variant="secondary"
-                            onClick={startVoiceRecording}
-                          >
-                            <Mic size={18} className="mr-2" /> {recordedVoiceUrl ? "Record Again" : "Start Recording"}
-                          </RomanticButton>
-                        )}
-                      </div>
-                    </div>
-
-                    {recordedVoiceUrl && (
-                      <div className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-xl bg-background/50 border border-white/10">
-                        <audio src={recordedVoiceUrl} controls className="h-8 max-w-full" />
-                        <div className="flex gap-2 w-full sm:w-auto">
-                          <RomanticButton
-                            variant="secondary"
-                            className="flex-1 sm:flex-none h-8 text-xs"
-                            onClick={async () => {
-                              const path = await uploadVoice();
-                              if (path) {
-                                setLocalProject({ ...localProject, voice_file_path: path });
-                                toast({ title: "Voice sample saved! 🎙️" });
-                              }
-                            }}
-                          >
-                            <Save size={14} className="mr-2" /> Use This Recording
-                          </RomanticButton>
-                          <button
-                            onClick={resetVoiceRecording}
-                            className="p-2 text-muted-foreground hover:text-destructive transition-colors"
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {localProject.voice_file_path && !recordedVoiceUrl && (
-                      <div className="flex items-center gap-2 text-xs text-primary font-medium">
-                        <Check size={14} /> Voice sample already saved.
-                      </div>
-                    )}
                   </div>
                 </div>
 
@@ -821,10 +740,10 @@ const Edit = () => {
             </div>
           </Tabs>
         </GlassCard>
-      </motion.div >
+      </motion.div>
 
       {/* Share Dialog */}
-      < Dialog open={showShareDialog} onOpenChange={setShowShareDialog} >
+      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
         <DialogContent className="glass-card border-border/50 sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="text-gradient text-2xl flex items-center gap-2">
@@ -858,8 +777,8 @@ const Edit = () => {
             </div>
           </div>
         </DialogContent>
-      </Dialog >
-    </div >
+      </Dialog>
+    </div>
   );
 };
 
