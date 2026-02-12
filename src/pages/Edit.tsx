@@ -13,7 +13,7 @@ import { useAnalytics, AnalyticsItem } from "@/hooks/useAnalytics";
 import { useQuiz, QuizQuestion } from "@/hooks/useQuiz";
 import { useTerminal, TerminalCommand } from "@/hooks/useTerminal";
 import { useShare } from "@/hooks/useShare";
-import { useStorage } from "@/hooks/useStorage";
+import { useStorage } from "@/context/StorageContext";
 import {
   Dialog,
   DialogContent,
@@ -31,7 +31,7 @@ const Edit = () => {
   const { getQuiz, upsertQuiz, loading: quizLoading } = useQuiz();
   const { getCommands, upsertCommands, loading: terminalLoading } = useTerminal();
   const { generateShare } = useShare();
-  const { uploadFile, getPublicUrl } = useStorage();
+  const { uploadFile } = useStorage();
 
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [shareCode, setShareCode] = useState("");
@@ -299,11 +299,18 @@ const Edit = () => {
                               onChange={async (e) => {
                                 const file = e.target.files?.[0];
                                 if (file) {
-                                  const { data } = await uploadFile(file, `songs/cover-${i}-${Date.now()}`);
+                                  if (file.size > 5 * 1024 * 1024) {
+                                    toast({
+                                      title: "Image too large",
+                                      description: "Max 5MB for song covers",
+                                      variant: "destructive"
+                                    });
+                                    return;
+                                  }
+                                  const { data } = await uploadFile(file, "images");
                                   if (data) {
-                                    const url = getPublicUrl(data.path);
                                     const newSongs = [...localProject.songs_meta];
-                                    newSongs[i] = { ...song, image: url };
+                                    newSongs[i] = { ...song, image: data.publicUrl };
                                     setLocalProject({ ...localProject, songs_meta: newSongs });
                                     toast({ title: "Cover uploaded! 🎨" });
                                   }
@@ -348,16 +355,18 @@ const Edit = () => {
                               onChange={async (e) => {
                                 const file = e.target.files?.[0];
                                 if (file) {
-                                  // Basic duration check (mocked for now as we'd need to load audio to check real duration)
                                   if (file.size > 10 * 1024 * 1024) {
-                                    toast({ title: "File too large", description: "Max 10MB", variant: "destructive" });
+                                    toast({
+                                      title: "Audio too large",
+                                      description: "Max 10MB for MP3 files",
+                                      variant: "destructive"
+                                    });
                                     return;
                                   }
-                                  const { data } = await uploadFile(file, `songs/audio-${i}-${Date.now()}`);
+                                  const { data } = await uploadFile(file, "songs");
                                   if (data) {
-                                    const url = getPublicUrl(data.path);
                                     const newSongs = [...localProject.songs_meta];
-                                    newSongs[i] = { ...song, audio: url };
+                                    newSongs[i] = { ...song, audio: data.publicUrl };
                                     setLocalProject({ ...localProject, songs_meta: newSongs });
                                     toast({ title: "Audio uploaded! 🎵" });
                                   }
@@ -406,10 +415,17 @@ const Edit = () => {
                         onChange={async (e) => {
                           const file = e.target.files?.[0];
                           if (file) {
-                            const { data } = await uploadFile(file, `collage-${Date.now()}`);
+                            if (file.size > 10 * 1024 * 1024) {
+                              toast({
+                                title: "Collage too large",
+                                description: "Max 10MB for memory collage",
+                                variant: "destructive"
+                              });
+                              return;
+                            }
+                            const { data } = await uploadFile(file, "images");
                             if (data) {
-                              const url = getPublicUrl(data.path);
-                              setLocalProject({ ...localProject, collage_url: url });
+                              setLocalProject({ ...localProject, collage_url: data.publicUrl });
                               toast({ title: "Collage uploaded! ✨" });
                             }
                           }

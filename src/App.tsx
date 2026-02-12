@@ -12,7 +12,28 @@ import Edit from "./pages/Edit";
 import SharedLoveOS from "./pages/SharedLoveOS";
 import NotFound from "./pages/NotFound";
 
+import { StorageProvider, useStorage } from "@/context/StorageContext";
+import { UploadProgress } from "@/components/love/UploadProgress";
+
 const queryClient = new QueryClient();
+
+const AppContent = () => {
+  const { fileName, progress, isUploading, error } = useStorage();
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/loveos" element={<LoveOS />} />
+        <Route path="/loveos/code" element={<SharedLoveOS />} />
+        <Route path="/edit" element={<ProtectedRoute><Edit /></ProtectedRoute>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <UploadProgress fileName={fileName} progress={progress} isUploading={isUploading} error={error} />
+    </BrowserRouter>
+  );
+};
 
 const App = () => (
   <ErrorBoundary>
@@ -20,17 +41,9 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/loveos" element={<LoveOS />} />
-            <Route path="/loveos/code" element={<SharedLoveOS />} />
-            <Route path="/edit" element={<ProtectedRoute><Edit /></ProtectedRoute>} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <StorageProvider>
+          <AppContent />
+        </StorageProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </ErrorBoundary>
