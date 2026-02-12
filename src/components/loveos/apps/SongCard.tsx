@@ -13,7 +13,7 @@ interface SongCardProps {
 }
 
 export const SongCard = ({ song, isFlipped, isPlaying, onClick, onAudioReady }: SongCardProps) => {
-    const { url: audioUrl } = useStorageUrl(song.audio);
+    const { url: audioUrl } = useStorageUrl(song.audio_path);
 
     useEffect(() => {
         if (audioUrl) {
@@ -36,7 +36,7 @@ export const SongCard = ({ song, isFlipped, isPlaying, onClick, onAudioReady }: 
             >
                 <div className="absolute inset-0 rounded-2xl overflow-hidden backface-hidden glass-card" style={{ backfaceVisibility: "hidden" }}>
                     <StorageImage
-                        path={song.image}
+                        path={song.image_path}
                         alt={song.title}
                         className="w-full h-full object-cover"
                         placeholder="/placeholder.svg"

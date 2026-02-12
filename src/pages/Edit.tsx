@@ -274,7 +274,7 @@ const Edit = () => {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Array.from({ length: 6 }).map((_, i) => {
-                    const song = localProject.songs_meta[i] || { title: "", artist: "", image: "", audio: "" };
+                    const song = localProject.songs_meta[i] || { title: "", artist: "", image_path: "", audio_path: "" };
                     return (
                       <GlassCard key={i} variant="subtle" className="p-4 space-y-4 border-white/10 group hover:border-primary/30 transition-all">
                         <div className="flex items-center justify-between">
@@ -285,8 +285,8 @@ const Edit = () => {
                         <div className="space-y-4">
                           {/* Image Upload */}
                           <div className="relative aspect-square rounded-xl overflow-hidden bg-accent/20 border-2 border-dashed border-white/10 group-hover:border-primary/20 transition-all">
-                            {song.image ? (
-                              <StorageImage path={song.image} alt="Song cover" className="w-full h-full object-cover" />
+                            {song.image_path ? (
+                              <StorageImage path={song.image_path} alt="Song cover" className="w-full h-full object-cover" />
                             ) : (
                               <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
                                 <ImageIcon size={24} className="mb-2 opacity-50" />
@@ -311,7 +311,7 @@ const Edit = () => {
                                   const { data } = await uploadFile(file, "images");
                                   if (data) {
                                     const newSongs = [...localProject.songs_meta];
-                                    newSongs[i] = { ...song, image: data.path };
+                                    newSongs[i] = { ...song, image_path: data.path };
                                     setLocalProject({ ...localProject, songs_meta: newSongs });
                                     toast({ title: "Cover uploaded! 🎨" });
                                   }
@@ -367,7 +367,7 @@ const Edit = () => {
                                   const { data } = await uploadFile(file, "songs");
                                   if (data) {
                                     const newSongs = [...localProject.songs_meta];
-                                    newSongs[i] = { ...song, audio: data.path };
+                                    newSongs[i] = { ...song, audio_path: data.path };
                                     setLocalProject({ ...localProject, songs_meta: newSongs });
                                     toast({ title: "Audio uploaded! 🎵" });
                                   }

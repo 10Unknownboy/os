@@ -23,15 +23,26 @@ export function useStorageUrl(path: string | null | undefined) {
 
         setLoading(true);
 
-        // For now we use getPublicUrl. 
-        // If the bucket is strictly private and we need signed URLs, 
-        // we would use createSignedUrl here.
-        const { data } = supabase.storage
-            .from("loveos-uploads")
-            .getPublicUrl(path);
+        const resolveUrl = async () => {
+            try {
+                const { data, error } = await supabase.storage
+                    .from("loveos-uploads")
+                    .createSignedUrl(path, 3600);
 
-        setUrl(data.publicUrl);
-        setLoading(false);
+                if (error) throw error;
+                setUrl(data.signedUrl);
+            } catch (err) {
+                console.error("Error resolving signed URL:", err);
+                const { data } = supabase.storage
+                    .from("loveos-uploads")
+                    .getPublicUrl(path);
+                setUrl(data.publicUrl);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        resolveUrl();
     }, [path]);
 
     return { url, loading };

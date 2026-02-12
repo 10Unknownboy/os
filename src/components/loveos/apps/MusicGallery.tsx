@@ -26,8 +26,8 @@ const MusicGallery = ({ customData }: MusicGalleryProps) => {
         id: i + 1,
         title: s.title || `Song ${i + 1}`,
         artist: s.artist || "Unknown",
-        image: s.image,
-        audio: s.audio,
+        image_path: s.image_path,
+        audio_path: s.audio_path,
       })));
       return;
     }

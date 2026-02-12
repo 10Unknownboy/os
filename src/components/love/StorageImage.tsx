@@ -5,9 +5,11 @@ import { Loader2 } from "lucide-react";
 interface StorageImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     path: string | null | undefined;
     placeholder?: string;
+    alt?: string;
+    className?: string;
 }
 
-export const StorageImage = ({ path, placeholder = "/placeholder.svg", ...props }: StorageImageProps) => {
+export const StorageImage = ({ path, placeholder = "/placeholder.svg", alt, className, ...props }: StorageImageProps) => {
     const { url, loading } = useStorageUrl(path);
 
     if (loading) {
@@ -18,5 +20,5 @@ export const StorageImage = ({ path, placeholder = "/placeholder.svg", ...props 
         );
     }
 
-    return <img src={url || placeholder} {...props} />;
+    return <img src={url || placeholder} alt={alt} {...props} />;
 };
