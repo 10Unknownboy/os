@@ -41,7 +41,6 @@ typings/
 .env.*
 
 # Build output
-dist/
 dist-ssr/
 build/
 
@@ -71,8 +70,7 @@ desktop.ini
 /blob-report/
 /playwright/.cache/
 
-# Vercel
-.vercel
+
 
 # Bun
 .bun
