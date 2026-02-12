@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, Lock, Unlock, Loader2, AlertCircle } from "lucide-react";
 import { useVoiceUnlock } from "@/hooks/useVoiceUnlock";
-import { GlassCard } from "./GlassCard";
-import { RomanticButton } from "./RomanticButton";
+import { GlassCard } from "@/components/love/GlassCard";
+import { RomanticButton } from "@/components/love/RomanticButton";
 
 interface VoiceUnlockScreenProps {
     targetWord: string;
